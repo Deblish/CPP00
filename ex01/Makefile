@@ -14,7 +14,7 @@ C++ = c++
 C++_FLAGS = -Wall -Wextra -Werror
 INFILES =	PhoneBook.cpp \
 			Contact.cpp \
-			Main.cpp
+			main.cpp
 
 OBJFILES = $(INFILES:.cpp=.o)
 
