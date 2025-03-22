@@ -18,7 +18,7 @@ bool	read_line(std::string &str, const std::string &msg)
 	std::cout << msg;
 	if (!std::getline(std::cin, str))
 	{
-		std::cout << "You typed Ctrl + D" << std::endl;
+		std::cout << "You sent Ctrl + D" << std::endl;
 		return false;
 	}
 	return true;
@@ -95,11 +95,10 @@ int main()
 			command_search(myPhoneBook);
         if (!read_line(command, "Type ADD, SEARCH or EXIT: "))
 		{
-			std::cout << "Exiting program" << std::endl;
+			std::cout << "Exiting program..." << std::endl;
 			return 1;
 		}
     }
-
 	return 0;
 }
 

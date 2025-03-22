@@ -12,7 +12,7 @@
 
 #include "PhoneBook.hpp"
 
-PhoneBook::PhoneBook() : _index(-1)
+PhoneBook::PhoneBook() : _isFull(false), _index(-1)
 {
 }
 
@@ -22,14 +22,20 @@ PhoneBook::~PhoneBook()
 
 void PhoneBook::addContact(Contact &newContact)
 {
-	_index = (_index + 1) % 8;
-	_contacts[_index] = newContact;
+	if (_index == MAX_INDEX)
+	{
+		_index = MIN_INDEX;
+		_isFull = true;
+	}
+	else
+		_index++;
+	_contacts[_index % MAX_CONTACTS] = newContact;
 	std::cout << "Contact added" << std::endl;
 }
 
 void PhoneBook::searchContact(int index)
 {
-	if (index < 0 || index > 7)
+	if (index < MIN_INDEX || index > MAX_INDEX)
 	{
 		std::cout << "Index out of range" << std::endl;
 		return ;
@@ -42,21 +48,33 @@ void PhoneBook::searchContact(int index)
 	_contacts[index].printContact();
 }
 
+static std::string truncate(std::string str)
+{
+	if (str.length() > MAX_LENGHT)
+	{
+		str.resize(MAX_LENGHT - 1);
+		str.append(".");
+	}
+	return (str);
+}
+
 void PhoneBook::printContacts()
 {
-	int i = 0;
+	int i = 0, rows = _index;
 	
 	if (_index == -1)
 	{
 		std::cout << "Your phonebook has no contacts" << std::endl;
 		return ;
 	}
-	while (i <= _index)
+	if (_isFull)
+		rows = MAX_INDEX;
+	while (i <= rows)
 	{
-		std::cout << std::setw(10) << i << "|";
-		std::cout << std::setw(10) << _contacts[i].get_first_name() << "|";
-		std::cout << std::setw(10) << _contacts[i].get_last_name() << "|";
-		std::cout << std::setw(10) << _contacts[i].get_nickname() << std::endl;
+		std::cout << std::setw(MAX_LENGHT) << i << "|";
+		std::cout << std::setw(MAX_LENGHT) << truncate(_contacts[i].get_first_name()) << "|";
+		std::cout << std::setw(MAX_LENGHT) << truncate(_contacts[i].get_last_name()) << "|";
+		std::cout << std::setw(MAX_LENGHT) << truncate(_contacts[i].get_nickname()) << std::endl;
 		i++;
 	}
 }
