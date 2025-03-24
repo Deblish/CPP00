@@ -1,4 +1,5 @@
 C++ = c++
+STD = -std=c++98
 C++_FLAGS = -Wall -Wextra -Werror
 INFILES =	Account.cpp \
 			tests.cpp \
@@ -13,7 +14,7 @@ $(NAME):$(OBJFILES)
 	$(C++) $(C++_FLAGS) $(OBJFILES) -o $(NAME) 
 
 %.o: %.cpp
-	$(C++) $(C++_FLAGS) -c $< -o $@
+	$(C++) $(STD) $(C++_FLAGS) -c $< -o $@
 
 clean:
 	rm -f $(OBJFILES)
