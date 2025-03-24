@@ -22,7 +22,7 @@ PhoneBook::~PhoneBook()
 
 void PhoneBook::addContact(Contact &newContact)
 {
-	if (_index == MAX_INDEX)
+	if (_index == (MAX_CONTACTS - 1))
 	{
 		_index = MIN_INDEX;
 		_isFull = true;
@@ -35,12 +35,12 @@ void PhoneBook::addContact(Contact &newContact)
 
 void PhoneBook::searchContact(int index)
 {
-	if (index < MIN_INDEX || index > MAX_INDEX)
+	if (index < MIN_INDEX || index > (MAX_CONTACTS - 1))
 	{
 		std::cout << "Index out of range" << std::endl;
 		return ;
 	}
-	if (index > _index)
+	if (!_isFull && index > _index)
 	{
 		std::cout << "Can't find a contact with that index" << std::endl;
 		return ;
@@ -68,7 +68,7 @@ void PhoneBook::printContacts()
 		return ;
 	}
 	if (_isFull)
-		rows = MAX_INDEX;
+		rows = MAX_CONTACTS - 1;
 	while (i <= rows)
 	{
 		std::cout << std::setw(MAX_LENGHT) << i << "|";

@@ -19,7 +19,6 @@
 # include "Contact.hpp"
 
 # define MAX_CONTACTS 8
-# define MAX_INDEX 7
 # define MIN_INDEX 0
 # define MAX_LENGHT 10
 
@@ -28,7 +27,7 @@ class PhoneBook
 	private:
 		bool _isFull;
 		int _index;
-		Contact _contacts[8];
+		Contact _contacts[MAX_CONTACTS];
 
 	public:
 		PhoneBook();
