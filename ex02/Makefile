@@ -11,7 +11,7 @@ NAME = globalBanksters
 all: $(NAME)
 
 $(NAME):$(OBJFILES)
-	$(C++) $(C++_FLAGS) $(OBJFILES) -o $(NAME) 
+	$(C++) $(STD) $(C++_FLAGS) $(OBJFILES) -o $(NAME) 
 
 %.o: %.cpp
 	$(C++) $(STD) $(C++_FLAGS) -c $< -o $@
